@@ -1,0 +1,7 @@
+.venv/
+Server/.venv/
+Server/instance/
+__pycache__/
+Server/__pycache__/
+*.pyc
+.envServer/venv/
