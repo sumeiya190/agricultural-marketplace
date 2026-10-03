@@ -119,8 +119,34 @@
 * Successfully tested registration through the actual website.
 * Confirmed that users registered through the website are saved to the SQLite database.
 
-## Current Status
+## **12. User Login API**
 
-**Completed:** Backend registration, validation, database verification, React registration interface, and frontend-to-backend registration integration.
+* Implemented a `POST /login` endpoint that:
 
-**Next development task:** Implement user login functionality and connect the React login form to the Flask backend.
+  * Receives the user's email and password as JSON.
+  * Checks that both email and password are provided.
+  * Searches for the user using the provided email.
+  * Verifies the provided password.
+  * Returns an appropriate response for successful or unsuccessful login.
+  * Returns basic user information after a successful login.
+
+## **13. React Frontend Login**
+
+* Created a separate React login page according to the project wireframe.
+* Added fields for:
+
+  * Email
+  * Password
+* Added basic form validation using required fields and appropriate input types.
+* Connected the React login form to the Flask `POST /login` API.
+* Configured the React frontend to send login data as JSON.
+* Added handling for successful and unsuccessful login responses.
+* Successfully tested login through the actual website.
+* Confirmed that valid login credentials return a successful login response.
+* Confirmed that incorrect login credentials are rejected.
+
+## **Current Status**
+
+**Completed:** Backend registration, input validation, database verification, React registration interface, frontend-to-backend registration integration, backend login, login API testing, React login interface, and frontend-to-backend login integration.
+
+**Next development task:** Implement user profile management functionality.
