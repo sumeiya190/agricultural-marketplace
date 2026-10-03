@@ -32,8 +32,8 @@ def register():
     if not all([first_name, last_name, email, password, phone_number, role]):
         return jsonify({"message": "All fields are required."}), 400
     
-    if not re.fullmatch(r"07\d{8}", phone_number):
-        return jsonify({"message": "Phone number must start with 07 and be 10 digits long."}), 400
+    if not re.fullmatch(r"07\d{8}|01\d{8}", phone_number):
+        return jsonify({"message": "Phone number must start with 07 or 01 and be 10 digits long."}), 400
     
     if not re.fullmatch(r"[^@]+@[^@]+\.[^@]+", email):
         return jsonify({"message": "Please enter a valid email address."}), 400
@@ -60,6 +60,35 @@ def register():
     db.session.add(new_user)
     db.session.commit()
     return jsonify({"message": "User registered successfully!"}), 201
+
+@app.route("/login", methods=["POST"])
+def login():
+    data = request.get_json()
+
+    email = data.get("email")
+    password = data.get("password")
+
+    if not email or not password:
+        return jsonify({"message": "Email and password are required."}), 400
+
+    user = User.query.filter_by(email=email).first()
+
+    if not user:
+        return jsonify({"message": "Invalid email or password."}), 401
+
+    if user.password != password:
+        return jsonify({"message": "Invalid email or password."}), 401
+
+    return jsonify({
+        "message": "Login successful!",
+        "user": {
+            "id": user.id,
+            "first_name": user.first_name,
+            "last_name": user.last_name,
+            "email": user.email,
+            "role": user.role
+        }
+    }), 200
 
 if __name__ == "__main__":
     app.run(debug=True)

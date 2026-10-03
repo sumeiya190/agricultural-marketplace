@@ -1,7 +1,12 @@
 .venv/
 Server/.venv/
+Server/venv/
 Server/instance/
 __pycache__/
 Server/__pycache__/
 *.pyc
-.envServer/venv/
+.env
+.env.*
+Client/node_modules/
+Client/dist/
+.kilo/worktrees/
