@@ -76,6 +76,14 @@
 
       * `user@gmail.com`
       * `user@yahoo.com`
+  * Added password strength validation:
+    * Must contain at least 8 characters.
+    * Must contain at least one uppercase letter.
+    * Must contain at least one lowercase letter.
+    * Must contain at least one number.
+    * Must contain at least one special character.
+  * Tested password validation through the React registration form.
+  * Confirmed weak passwords are rejected and strong passwords are accepted.
 
 ## 8. API Testing
 
@@ -147,6 +155,6 @@
 
 ## **Current Status**
 
-**Completed:** Backend registration, input validation, database verification, React registration interface, frontend-to-backend registration integration, backend login, login API testing, React login interface, and frontend-to-backend login integration.
+**Completed:** Backend registration, input validation, password-strength validation, database verification, React registration interface, frontend-to-backend registration integration, backend login, login API testing, React login interface, and frontend-to-backend login integration.
 
 **Next development task:** Implement user profile management functionality.

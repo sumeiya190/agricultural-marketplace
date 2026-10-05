@@ -31,7 +31,18 @@ def register():
 
     if not all([first_name, last_name, email, password, phone_number, role]):
         return jsonify({"message": "All fields are required."}), 400
-    
+
+    if (
+        len(password) < 8 
+        or not re.search(r"[A-Z]", password) 
+        or not re.search(r"[a-z]", password) 
+        or not re.search(r"\d", password) 
+        or not re.search(r"[!@#$%^&*(),.?\":{}|<>]", password)
+        ):
+        return jsonify({
+            "message": "Password must be at least 8 characters long and contain an uppercase letter, lowercase letter, number, and special character."
+        }), 400
+
     if not re.fullmatch(r"07\d{8}|01\d{8}", phone_number):
         return jsonify({"message": "Phone number must start with 07 or 01 and be 10 digits long."}), 400
     
