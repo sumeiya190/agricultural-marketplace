@@ -153,8 +153,21 @@
 * Confirmed that valid login credentials return a successful login response.
 * Confirmed that incorrect login credentials are rejected.
 
+## **14. User Profile Management**
+
+* Implemented a `GET /profile/<user_id>` endpoint to retrieve user profile information.
+* Implemented a `PUT /profile/<user_id>` endpoint to update user profile information.
+* Added validation for required profile fields.
+* Added email format validation.
+* Added Kenyan phone number format validation.
+* Added checks to prevent duplicate email addresses.
+* Added checks to prevent duplicate phone numbers.
+* Confirmed that passwords are not returned when retrieving profile information.
+* Successfully tested profile retrieval using Postman.
+* Successfully tested profile updates using Postman.
+
 ## **Current Status**
 
-**Completed:** Backend registration, input validation, password-strength validation, database verification, React registration interface, frontend-to-backend registration integration, backend login, login API testing, React login interface, and frontend-to-backend login integration.
+**Completed:** Backend registration, input validation, password-strength validation, database verification, React registration interface, frontend-to-backend registration integration, backend login, login API testing, React login interface, frontend-to-backend login integration, and user profile management.
 
-**Next development task:** Implement user profile management functionality.
+**Next development task:** Implement produce listing functionality.

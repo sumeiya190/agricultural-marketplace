@@ -101,5 +101,73 @@ def login():
         }
     }), 200
 
+@app.route("/profile/<int:user_id>", methods=["GET"])
+def get_profile(user_id):
+    user = User.query.get(user_id)
+
+    if not user:
+        return jsonify({"message": "User not found."}), 404
+
+    return jsonify({
+        "id": user.id,
+        "first_name": user.first_name,
+        "last_name": user.last_name,
+        "email": user.email,
+        "phone_number": user.phone_number,
+        "role": user.role
+    }), 200
+
+@app.route("/profile/<int:user_id>", methods=["PUT"])
+def update_profile(user_id):
+    user = User.query.get(user_id)
+
+    if not user:
+        return jsonify({"message": "User not found."}), 404
+
+    data = request.get_json()
+
+    first_name = data.get("first_name")
+    last_name = data.get("last_name")
+    email = data.get("email")
+    phone_number = data.get("phone_number")
+
+    if not all([first_name, last_name, email, phone_number]):
+        return jsonify({"message": "All profile fields are required."}), 400
+
+    if not re.fullmatch(r"(07|01)\d{8}", phone_number):
+        return jsonify({
+            "message": "Phone number must start with 07 or 01 and be 10 digits long."
+        }), 400
+
+    if not re.fullmatch(r"[^@\s]+@[^@\s]+\.[^@\s]+", email):
+        return jsonify({"message": "Please enter a valid email address."}), 400
+
+    existing_email = User.query.filter(
+        User.email == email,
+        User.id != user_id
+    ).first()
+
+    if existing_email:
+        return jsonify({"message": "Email already exists."}), 400
+
+    existing_phone = User.query.filter(
+        User.phone_number == phone_number,
+        User.id != user_id
+    ).first()
+
+    if existing_phone:
+        return jsonify({"message": "Phone number already exists."}), 400
+
+    user.first_name = first_name
+    user.last_name = last_name
+    user.email = email
+    user.phone_number = phone_number
+
+    db.session.commit()
+
+    return jsonify({
+        "message": "Profile updated successfully!"
+    }), 200
+
 if __name__ == "__main__":
     app.run(debug=True)
