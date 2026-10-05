@@ -1,11 +1,17 @@
 import re
+import os
+import uuid
+from datetime import datetime
 from flask import Flask, request, jsonify
+from werkzeug.utils import secure_filename
 from flask_cors import CORS
 from database import db
-from models import User
+from models import User, Product
 
 app = Flask(__name__)
 CORS(app)
+
+app.config["UPLOAD_FOLDER"] = os.path.join(os.getcwd(), "uploads")
 
 # Database configuration
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///agricultural_marketplace.db"
@@ -168,6 +174,77 @@ def update_profile(user_id):
     return jsonify({
         "message": "Profile updated successfully!"
     }), 200
+
+@app.route("/products", methods=["POST"])
+def add_product():
+    product_name = request.form.get("product_name")
+    description = request.form.get("description")
+    quantity = request.form.get("quantity")
+    price = request.form.get("price")
+    location = request.form.get("location")
+    farmer_id = request.form.get("farmer_id")
+    image = request.files.get("image")
+
+    if not all([product_name, description, quantity, price, location, farmer_id]):
+        return jsonify({
+            "message": "All product fields are required."
+        }), 400
+
+    farmer = User.query.filter_by(id=farmer_id, role="Farmer").first()
+
+    if not farmer:
+        return jsonify({
+            "message": "Valid farmer account is required."
+        }), 400
+
+    try:
+        quantity = int(quantity)
+        price = float(price)
+        farmer_id = int(farmer_id)
+    except ValueError:
+        return jsonify({
+            "message": "Quantity, price, and farmer ID must be valid numbers."
+        }), 400
+
+    image_filename = None
+
+    if image:
+        image_filename = secure_filename(image.filename)
+        file_extension = os.path.splitext(image_filename)[1]
+        image_filename = f"{uuid.uuid4()}{file_extension}"
+
+        image.save(os.path.join(app.config["UPLOAD_FOLDER"], image_filename))
+
+    new_product = Product(
+        product_name=product_name,
+        description=description,
+        quantity=quantity,
+        price=price,
+        image=image_filename,
+        location=location,
+        date_listed=datetime.utcnow().date(),
+        status="Available",
+        farmer_id=farmer_id
+    )
+
+    db.session.add(new_product)
+    db.session.commit()
+
+    return jsonify({
+        "message": "Produce listed successfully!",
+        "product": {
+            "id": new_product.id,
+            "product_name": new_product.product_name,
+            "description": new_product.description,
+            "quantity": new_product.quantity,
+            "price": new_product.price,
+            "image": new_product.image,
+            "location": new_product.location,
+            "date_listed": new_product.date_listed.isoformat(),
+            "status": new_product.status,
+            "farmer_id": new_product.farmer_id
+        }
+    }), 201
 
 if __name__ == "__main__":
     app.run(debug=True)

@@ -10,3 +10,4 @@ Server/__pycache__/
 Client/node_modules/
 Client/dist/
 .kilo/worktrees/
+Server/uploads/

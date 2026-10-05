@@ -1,0 +1,111 @@
+.page-navigation {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 25px;
+}
+
+.page-navigation a {
+    color: #2e7d32;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.page-navigation a:hover {
+    text-decoration: underline;
+}
+
+.list-produce-page {
+    min-height: 100vh;
+    background: #f5f7f5;
+    padding: 40px 20px;
+}
+
+.list-produce-card {
+    max-width: 700px;
+    margin: 0 auto;
+    background: white;
+    padding: 35px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+.page-header {
+    margin-bottom: 30px;
+}
+
+.page-header h1 {
+    margin: 0 0 8px;
+    font-size: 30px;
+}
+
+.page-header p {
+    margin: 0;
+    color: #666;
+}
+
+.produce-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-group label {
+    font-weight: 600;
+}
+
+.form-group input,
+.form-group textarea {
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 15px;
+    font-family: inherit;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #2e7d32;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.form-group small {
+    color: #777;
+    font-size: 13px;
+}
+
+.list-produce-button {
+    padding: 13px;
+    border: none;
+    border-radius: 6px;
+    background: #2e7d32;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.list-produce-button:hover {
+    background: #256628;
+}
+
+@media (max-width: 600px) {
+    .list-produce-card {
+        padding: 25px;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+}

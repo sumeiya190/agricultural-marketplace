@@ -166,8 +166,29 @@
 * Successfully tested profile retrieval using Postman.
 * Successfully tested profile updates using Postman.
 
-## **Current Status**
+## **15. Produce Listing**
 
-**Completed:** Backend registration, input validation, password-strength validation, database verification, React registration interface, frontend-to-backend registration integration, backend login, login API testing, React login interface, frontend-to-backend login integration, and user profile management.
+* Implemented a backend endpoint for farmers to list produce.
+* Added validation to ensure only valid farmer accounts can create produce listings.
+* Added validation for required product information, quantity, price, location, and farmer ID.
+* Added support for uploading produce images.
+* Added unique filenames for uploaded images to prevent filename conflicts.
+* Stored produce listing information in the database.
+* Successfully tested produce listing through Postman.
+* Successfully tested produce image upload.
 
-**Next development task:** Implement produce listing functionality.
+## **16. Home Page and Navigation**
+
+* Implemented a public Home page describing the Agricultural Marketplace.
+* Added Home, About, and How It Works sections.
+* Added navigation links for Login and Register.
+* Added Login and Register navigation back to the Home page.
+* Added a Farmer Dashboard with marketplace management options.
+* Added navigation from the Farmer Dashboard to the List Produce page.
+* Added a Back link from the List Produce page to the Farmer Dashboard.
+* Added a Logout link to the Farmer Dashboard that returns the user to the Home page.
+* Separated page-specific CSS files for the React pages.
+
+**Completed:** Backend registration, input validation, password-strength validation, database verification, React registration interface, frontend-to-backend registration integration, backend login, login API testing, React login interface, frontend-to-backend login integration, user profile management, produce listing functionality, produce image upload, Home page, Farmer Dashboard, and basic page navigation.
+
+**Next development task:** Implement produce listing management.

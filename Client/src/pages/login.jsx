@@ -1,6 +1,7 @@
 import { useState } from "react";
+import "./login.css";
 
-function Login({onRegister}) {
+function Login({onHome, onRegister, onLoginSuccess}) {
   const [loginData, setLoginData] = useState({
     email: "",
     password: "",
@@ -29,6 +30,7 @@ function Login({onRegister}) {
 
     if (response.ok) {
       alert(data.message);
+      onLoginSuccess();
     } else {
       alert(data.message);
     }
@@ -38,13 +40,21 @@ function Login({onRegister}) {
 };
 
   return (
-    <div className="register-page">
-      <div className="register-container">
+    <div className="login-page">
+      <div className="login-container">
+        <div className="page-navigation">
+          <a href="#" onClick={event => {
+            event.preventDefault();
+            onHome();}}
+          >
+            Home
+          </a>
+        </div>
         <h1>Agricultural Marketplace</h1>
         <h2>Login</h2>
 
         <form onSubmit={handleSubmit}>
-          <div className="form-group">
+          <div className="login-form-group">
             <label>Email</label>
             <input
               type="email"
@@ -55,7 +65,7 @@ function Login({onRegister}) {
             />
           </div>
 
-          <div className="form-group">
+          <div className="login-form-group">
             <label>Password</label>
             <input
               type="password"
@@ -69,7 +79,7 @@ function Login({onRegister}) {
           <button type="submit">Login</button>
         </form>
 
-        <p className="login-link">
+        <p className="login-register-link">
           Don't have an account?{" "}
           <a href="#" onClick={event => {
             event.preventDefault();

@@ -1,6 +1,7 @@
 import { useState } from "react";
+import "./register.css";
 
-function Register({onLogin}) {
+function Register({onHome, onLogin}) {
   const [formData, setFormData] = useState({
     first_name: "",
     last_name: "",
@@ -44,6 +45,14 @@ function Register({onLogin}) {
   return (
     <div className="register-page">
       <div className="register-container">
+        <div className="page-navigation">
+          <a href="#" onClick={event => {
+            event.preventDefault();
+            onHome();}}
+          >
+            Home
+          </a>
+        </div>
         <h1>Agricultural Marketplace</h1>
         <h2>Create an Account</h2>
 
