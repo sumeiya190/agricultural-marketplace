@@ -4,9 +4,13 @@ import Login from "./pages/login";
 import ListProduce from "./pages/listProduce";
 import FarmerDashboard from "./pages/farmerDashboard";
 import Home from "./pages/home";
+import ManageListings from "./pages/manageListings"; 
+import ViewOrders from "./pages/viewOrders"; 
+
 
 function App() {
   const [page, setPage] = useState("home");
+  const [loggedInUser, setLoggedInUser] = useState(null);
 
   return (
     <>
@@ -24,15 +28,35 @@ function App() {
         <Login
           onHome={() => setPage("home")}
           onRegister={() => setPage("register")}
-          onLoginSuccess={() => setPage("dashboard")}
+          onLoginSuccess={(user) =>{ 
+            setLoggedInUser(user);
+            setPage("dashboard");
+          }}
         />
       ) : page === "dashboard" ? (
         <FarmerDashboard
+          user={loggedInUser}
           onListProduce={() => setPage("list")}
-          onLogout={() => setPage("home")}
+          onManageListings={() => setPage("manageListings")}
+          onViewOrders={() => setPage("viewOrders")}
+          onLogout={() => {
+            setLoggedInUser(null);
+            setPage("home");
+          }}
+        />
+      ) : page === "manageListings" ? (
+        <ManageListings
+          user={loggedInUser}
+          onBack={() => setPage("dashboard")}
+        />
+      ) : page === "viewOrders" ? (
+        <ViewOrders
+          user={loggedInUser}
+          onBack={() => setPage("dashboard")}
         />
       ) : (
         <ListProduce
+          user={loggedInUser}
           onBack={() => setPage("dashboard")}
         />
       )}

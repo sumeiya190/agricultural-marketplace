@@ -77,3 +77,29 @@ The system shall allow buyers to select a produce listing, specify the required 
 ### FR19: View Buyer Orders
 
 The system shall allow buyers to view their submitted orders and their current order statuses.
+
+## **Future UI Improvements and Design Tasks**
+
+### **1. Farmer Dashboard Layout**
+- [ ] Display the welcome message on the left side of the top row.
+- [ ] Display the Logout button on the right side of the same row.
+- [ ] Center the “Farmer Dashboard” heading.
+- [ ] Position the dashboard management options below the heading.
+- [ ] Improve spacing, sizing, and alignment to make better use of the available screen space.
+- [ ] Make the dashboard responsive and visually balanced on expanded and smaller screens.
+
+### **2. Navigation Improvements**
+- [ ] Add a consistent navigation bar to the main pages.
+- [ ] Allow users to navigate between relevant sections without returning to the dashboard each time.
+- [ ] Keep navigation links consistent across the Farmer Dashboard, List Produce, Manage Listings, Orders, and Analytics pages.
+
+### **3. Visual Design Polish**
+- [ ] Improve the overall appearance of the dashboard and management pages.
+- [ ] Standardize button sizes, headings, spacing, and form layouts.
+- [ ] Review whether relevant produce images or other visual elements would improve the interface without making it cluttered.
+
+### **4. Profile Update Interface**
+- [ ] Add a frontend interface that allows users to view and update their profile information.
+- [ ] Connect the profile update form to the existing profile update API.
+- [ ] Allow users to update their own profile details without using Postman or directly accessing the backend.
+- [ ] Test the complete profile update process from the frontend to the database.

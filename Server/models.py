@@ -21,3 +21,14 @@ class Product(db.Model):
     date_listed = db.Column(db.Date, nullable=False)
     status = db.Column(db.String(20), nullable=False)
     farmer_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
+
+
+class Order(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    order_date = db.Column(db.Date, nullable=False)
+    quantity = db.Column(db.Integer, nullable=False)
+    total_amount = db.Column(db.Float, nullable=False)
+    status = db.Column(db.String(20), nullable=False, default="Pending")
+
+    buyer_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
+    product_id = db.Column(db.Integer, db.ForeignKey("product.id"), nullable=False)

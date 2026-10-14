@@ -109,3 +109,26 @@
         grid-template-columns: 1fr;
     }
 }
+/* Hide the up/down controls on number inputs */
+.number-input::-webkit-inner-spin-button,
+.number-input::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.number-input {
+    -moz-appearance: textfield;
+    appearance: textfield;
+}
+.listing-product {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.listing-image {
+    width: 55px;
+    height: 55px;
+    object-fit: cover;
+    border-radius: 6px;
+}

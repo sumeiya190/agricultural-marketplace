@@ -14,22 +14,22 @@ function Home({ onLogin, onRegister }) {
           <a href="#about">About</a>
           <a href="#how-it-works">How It Works</a>
           <a
-            href="#login"
+            href="#register"
             onClick={(event) => {
               event.preventDefault();
               onLogin();
             }}
           >
-            Login
+            Register
           </a>
           <a
-            href="#register"
+            href="#login"
             onClick={(event) => {
               event.preventDefault();
               onRegister();
             }}
           >
-            Register
+            Login
           </a>
         </div>
       </nav>

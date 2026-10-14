@@ -165,17 +165,22 @@
 * Confirmed that passwords are not returned when retrieving profile information.
 * Successfully tested profile retrieval using Postman.
 * Successfully tested profile updates using Postman.
+* **Frontend profile update interface is still pending.**
+* **Future task: Connect the profile update interface to the existing backend endpoint and test profile updates through the website.**
 
-## **15. Produce Listing**
+## **15. Produce Listing and Image Upload**
 
 * Implemented a backend endpoint for farmers to list produce.
 * Added validation to ensure only valid farmer accounts can create produce listings.
 * Added validation for required product information, quantity, price, location, and farmer ID.
 * Added support for uploading produce images.
 * Added unique filenames for uploaded images to prevent filename conflicts.
-* Stored produce listing information in the database.
+* Stored produce listing information in the SQLite database.
 * Successfully tested produce listing through Postman.
-* Successfully tested produce image upload.
+* Successfully tested produce image upload through Postman.
+* Connected the React List Produce form to the Flask backend.
+* Successfully submitted produce listings through the actual website.
+* Confirmed that submitted listings are saved and can be retrieved from the database.
 
 ## **16. Home Page and Navigation**
 
@@ -189,6 +194,89 @@
 * Added a Logout link to the Farmer Dashboard that returns the user to the Home page.
 * Separated page-specific CSS files for the React pages.
 
-**Completed:** Backend registration, input validation, password-strength validation, database verification, React registration interface, frontend-to-backend registration integration, backend login, login API testing, React login interface, frontend-to-backend login integration, user profile management, produce listing functionality, produce image upload, Home page, Farmer Dashboard, and basic page navigation.
+## **17. Produce Listing Management**
 
-**Next development task:** Implement produce listing management.
+* Implemented a backend endpoint to retrieve all produce listings belonging to a farmer.
+* Created the React Manage Listings page.
+* Connected the Manage Listings page to the Flask backend.
+* Successfully displayed saved produce listings on the website.
+* Implemented a backend endpoint to update existing produce listings.
+* Added an Edit form to the Manage Listings page.
+* Connected the Edit form to the backend update endpoint.
+* Successfully tested editing a produce listing through the website.
+* Implemented a backend endpoint to delete produce listings.
+* Added a Remove button and confirmation prompt to the Manage Listings page.
+* Connected the Remove button to the backend delete endpoint.
+* Successfully tested deleting a produce listing through the website.
+* Added success and error messages for listing operations.
+
+## **18. Produce Image Display**
+
+* Added an image-upload field to the React List Produce form.
+* Configured the Flask backend to serve uploaded images.
+* Implemented image filename storage in the Product database model.
+* Displayed uploaded produce images on the Manage Listings page.
+* Confirmed that uploaded images load correctly in the browser.
+
+## **19. Order Management**
+
+* Created an `Order` database model to store order information, including order date, quantity, total amount, status, buyer ID, and product ID.
+* Created the orders table in the SQLite database.
+* Implemented a backend endpoint to allow buyers to place orders.
+* Added validation for buyer ID, product ID, and order quantity.
+* Added checks to ensure that the buyer has a valid Buyer account.
+* Added checks to ensure that the requested product exists and is available.
+* Added validation to prevent orders exceeding the available product quantity.
+* Implemented automatic calculation of the order's total amount.
+* Set new orders to a default status of Pending.
+* Successfully tested placing orders through Postman.
+* Implemented a backend endpoint for farmers to retrieve orders associated with their produce listings.
+* Successfully tested retrieving farmer orders through Postman.
+* Implemented a backend endpoint for farmers to confirm or reject pending orders.
+* Added validation to ensure that only pending orders can be updated.
+* Added checks to ensure that an order belongs to the farmer attempting to update it.
+* Successfully tested confirming and rejecting orders through the backend.
+* Created the React View Orders page.
+* Connected the View Orders page to the Flask backend.
+* Displayed order details, including order ID, product name, buyer ID, quantity, total amount, and status.
+* Added Confirm and Reject buttons for pending orders.
+* Connected the Confirm and Reject buttons to the backend order-status update endpoint.
+* Displayed updated order statuses on the website after successful updates.
+* Tested viewing orders and updating order statuses through the frontend.
+
+## **20. Current Development Status**
+
+| Feature | Status |
+|---|---|
+| User registration and validation | Implemented and tested |
+| User login | Implemented and tested |
+| User profile retrieval and updates | Backend tested through Postman; frontend pending |
+| Home page and basic navigation | Implemented |
+| Farmer Dashboard | Implemented |
+| List Produce form | Implemented and tested |
+| Manage Listings | Implemented and tested |
+| Edit and delete produce listings | Implemented and tested |
+| Upload and display produce images | Implemented and tested |
+| Order placement backend | Implemented and tested through Postman |
+| Farmer order retrieval backend | Implemented and tested through Postman |
+| Confirm and Reject order backend | Implemented and tested |
+| View Orders frontend | Implemented and tested |
+| Buyer Dashboard | Not yet implemented |
+| Buyer-facing produce search | Not yet implemented |
+| Search by location and radius | Not yet implemented |
+| Calculate distance to nearby farmers | Not yet implemented |
+| Display nearby farmers | Not yet implemented |
+| Buyer-facing order interface | Not yet implemented |
+| Farmer analytics | Not yet implemented |
+
+## **21. Next Development Task**
+
+**Next task: Implement the frontend profile update interface.**
+
+1. Create an interface for users to view and edit their profile information.
+2. Connect the profile form to the existing `PUT /profile/<user_id>` endpoint.
+3. Test profile updates through the website.
+4. Verify that the updated information is saved correctly in the database.
+
+
+**Important development note:** The listing update and delete endpoints should eventually verify that the authenticated farmer owns the listing. Profile updates should likewise ensure that users can only update their own profiles.

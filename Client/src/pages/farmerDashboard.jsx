@@ -1,12 +1,12 @@
 import "./farmerDashboard.css";
 
-function FarmerDashboard({onListProduce, onLogout }) {
+function FarmerDashboard({user,onListProduce, onManageListings, onViewOrders, onLogout }) {
   return (
     <div className="farmer-dashboard-page">
       <div className="farmer-dashboard-container">
         <div className="dashboard-header">
             <h1>Farmer Dashboard</h1>
-            
+            {user && (<p>Welcome, {user.first_name}!</p>)}
             <a href="#" className="logout-link" onClick={(event) => 
             { event.preventDefault(); onLogout();}}>
                 Logout
@@ -20,11 +20,11 @@ function FarmerDashboard({onListProduce, onLogout }) {
             List Produce
           </button>
 
-          <button>
+          <button onClick={onManageListings}>
             Manage Listings
           </button>
 
-          <button>
+          <button onClick={onViewOrders}>
             View Orders
           </button>
 
