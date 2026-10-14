@@ -11,3 +11,4 @@ Client/node_modules/
 Client/dist/
 .kilo/worktrees/
 Server/uploads/
+.vscode/
