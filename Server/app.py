@@ -45,6 +45,8 @@ def register():
 
     if not all([first_name, last_name, email, password, phone_number, role]):
         return jsonify({"message": "All fields are required."}), 400
+    if not password.strip():
+        return jsonify({"message": "Password cannot be blank."}), 400
 
     if (
         len(password) < 8 
@@ -93,7 +95,7 @@ def login():
     email = data.get("email")
     password = data.get("password")
 
-    if not email or not password:
+    if not email or not password or not password.strip():
         return jsonify({"message": "Email and password are required."}), 400
 
     user = User.query.filter_by(email=email).first()
