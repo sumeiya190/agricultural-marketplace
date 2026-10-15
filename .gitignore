@@ -12,3 +12,4 @@ Client/dist/
 .kilo/worktrees/
 Server/uploads/
 .vscode/
+Server/migrate_passwords.py

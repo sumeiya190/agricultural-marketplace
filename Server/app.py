@@ -4,6 +4,7 @@ import uuid
 from datetime import datetime
 from flask import Flask, request, jsonify
 from werkzeug.utils import secure_filename
+from werkzeug.security import generate_password_hash, check_password_hash
 from flask_cors import CORS
 from database import db
 from models import User, Product, Order
@@ -76,7 +77,7 @@ def register():
         first_name=first_name,
         last_name=last_name,
         email=email,
-        password=password,
+        password=generate_password_hash(password),
         phone_number=phone_number,
         role=role
     )
@@ -100,7 +101,7 @@ def login():
     if not user:
         return jsonify({"message": "Invalid email or password."}), 401
 
-    if user.password != password:
+    if not check_password_hash(user.password, password):
         return jsonify({"message": "Invalid email or password."}), 401
 
     return jsonify({
