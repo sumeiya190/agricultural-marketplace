@@ -3,9 +3,11 @@ import Register from "./pages/register";
 import Login from "./pages/login";
 import ListProduce from "./pages/listProduce";
 import FarmerDashboard from "./pages/farmerDashboard";
+import Profile from "./pages/profile";
 import Home from "./pages/home";
 import ManageListings from "./pages/manageListings"; 
-import ViewOrders from "./pages/viewOrders"; 
+import ViewOrders from "./pages/viewOrders";
+
 
 
 function App() {
@@ -39,10 +41,16 @@ function App() {
           onListProduce={() => setPage("list")}
           onManageListings={() => setPage("manageListings")}
           onViewOrders={() => setPage("viewOrders")}
+          onUpdateProfile={() => setPage("updateProfile")}
           onLogout={() => {
             setLoggedInUser(null);
             setPage("home");
           }}
+        />
+      ): page === "updateProfile" ? (
+        <Profile
+          user={loggedInUser}
+          onBack={() => setPage("dashboard")}
         />
       ) : page === "manageListings" ? (
         <ManageListings

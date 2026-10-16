@@ -163,10 +163,17 @@
 * Added checks to prevent duplicate email addresses.
 * Added checks to prevent duplicate phone numbers.
 * Confirmed that passwords are not returned when retrieving profile information.
-* Successfully tested profile retrieval using Postman.
-* Successfully tested profile updates using Postman.
-* **Frontend profile update interface is still pending.**
-* **Future task: Connect the profile update interface to the existing backend endpoint and test profile updates through the website.**
+* Created a React profile interface to view and edit first name, last name, email, and phone number.
+* Added styling for the profile page.
+* Connected the profile form to the Flask `PUT /profile/<user_id>` endpoint.
+* Successfully tested profile updates through the website.
+* Verified that updated profile information persists after refreshing and logging in again.
+* Installed and configured Flask-JWT-Extended for token-based authentication.
+* Updated the login endpoint to generate and return a JWT access token after successful authentication.
+* Protected profile retrieval and update endpoints with JWT authentication.
+* Added ownership checks to ensure users can only view and update their own profiles.
+* Successfully tested profile updates using a valid access token.
+* Confirmed that attempts to update or view another user's profile are rejected with a `403 Forbidden` response.
 
 ## **15. Produce Listing and Image Upload**
 
@@ -250,7 +257,7 @@
 |---|---|
 | User registration and validation | Implemented and tested |
 | User login | Implemented and tested |
-| User profile retrieval and updates | Backend tested through Postman; frontend pending |
+| User profile retrieval and updates | Implemented and tested through the website and Postman; JWT authentication and ownership checks verified |
 | Home page and basic navigation | Implemented |
 | Farmer Dashboard | Implemented |
 | List Produce form | Implemented and tested |
@@ -271,12 +278,15 @@
 
 ## **21. Next Development Task**
 
-**Next task: Implement the frontend profile update interface.**
+**Next task: Implement and strengthen buyer-facing marketplace features.**
 
-1. Create an interface for users to view and edit their profile information.
-2. Connect the profile form to the existing `PUT /profile/<user_id>` endpoint.
-3. Test profile updates through the website.
-4. Verify that the updated information is saved correctly in the database.
+Planned tasks:
 
+1. Implement the Buyer Dashboard.
+2. Develop buyer-facing produce search and browsing.
+3. Implement search by location and radius.
+4. Calculate distances to nearby farmers.
+5. Display nearby farmers and their produce.
+6. Implement a buyer-facing order interface.
 
-**Important development note:** The listing update and delete endpoints should eventually verify that the authenticated farmer owns the listing. Profile updates should likewise ensure that users can only update their own profiles.
+**Important development note:** The produce listing update and delete endpoints should verify that the authenticated farmer owns the listing. Other protected endpoints should also enforce authentication and ownership checks where appropriate.

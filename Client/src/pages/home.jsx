@@ -17,7 +17,7 @@ function Home({ onLogin, onRegister }) {
             href="#register"
             onClick={(event) => {
               event.preventDefault();
-              onLogin();
+              onRegister();
             }}
           >
             Register
@@ -26,7 +26,7 @@ function Home({ onLogin, onRegister }) {
             href="#login"
             onClick={(event) => {
               event.preventDefault();
-              onRegister();
+              onLogin();
             }}
           >
             Login

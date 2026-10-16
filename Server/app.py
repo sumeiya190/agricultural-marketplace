@@ -6,11 +6,17 @@ from flask import Flask, request, jsonify
 from werkzeug.utils import secure_filename
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_cors import CORS
+from flask_jwt_extended import (JWTManager, create_access_token, jwt_required, get_jwt_identity)
 from database import db
 from models import User, Product, Order
 
 
 app = Flask(__name__)
+app.config["JWT_SECRET_KEY"] = os.environ.get("JWT_SECRET_KEY", "your_jwt_secret_key")
+if not app.config["JWT_SECRET_KEY"]:
+    raise RuntimeError("JWT_SECRET_KEY environment variable is required.")
+
+jwt = JWTManager(app)
 CORS(app)
 
 app.config["UPLOAD_FOLDER"] = os.path.join(os.getcwd(), "uploads")
@@ -106,19 +112,28 @@ def login():
     if not check_password_hash(user.password, password):
         return jsonify({"message": "Invalid email or password."}), 401
 
+    access_token = create_access_token(identity=str(user.id))
+
     return jsonify({
         "message": "Login successful!",
+        "access_token": access_token,
         "user": {
             "id": user.id,
             "first_name": user.first_name,
             "last_name": user.last_name,
             "email": user.email,
+            "phone_number": user.phone_number,
             "role": user.role
         }
     }), 200
 
 @app.route("/profile/<int:user_id>", methods=["GET"])
+@jwt_required()
 def get_profile(user_id):
+    current_user_id = get_jwt_identity()
+    if str(user_id) != current_user_id:
+        return jsonify({"message": "You can only view your own profile."}), 403
+
     user = User.query.get(user_id)
 
     if not user:
@@ -134,7 +149,13 @@ def get_profile(user_id):
     }), 200
 
 @app.route("/profile/<int:user_id>", methods=["PUT"])
+@jwt_required()
 def update_profile(user_id):
+    current_user_id = get_jwt_identity()
+
+    if str(user_id) != current_user_id:
+        return jsonify({"message": "You can only update your own profile."}), 403
+
     user = User.query.get(user_id)
 
     if not user:

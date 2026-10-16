@@ -30,7 +30,7 @@ function Login({onHome, onRegister, onLoginSuccess}) {
 
     if (response.ok) {
       alert(data.message);
-      onLoginSuccess(data.user);
+      onLoginSuccess({...data.user, access_token: data.access_token});
     } else {
       alert(data.message);
     }

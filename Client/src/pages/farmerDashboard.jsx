@@ -1,6 +1,6 @@
 import "./farmerDashboard.css";
 
-function FarmerDashboard({user,onListProduce, onManageListings, onViewOrders, onLogout }) {
+function FarmerDashboard({user,onListProduce, onManageListings, onViewOrders, onUpdateProfile, onLogout }) {
   return (
     <div className="farmer-dashboard-page">
       <div className="farmer-dashboard-container">
@@ -28,8 +28,8 @@ function FarmerDashboard({user,onListProduce, onManageListings, onViewOrders, on
             View Orders
           </button>
 
-          <button>
-            Update Orders
+          <button onClick={onUpdateProfile}>
+            My Profile
           </button>
 
           <button>

@@ -103,3 +103,5 @@ The system shall allow buyers to view their submitted orders and their current o
 - [ ] Connect the profile update form to the existing profile update API.
 - [ ] Allow users to update their own profile details without using Postman or directly accessing the backend.
 - [ ] Test the complete profile update process from the frontend to the database.
+
+- [ ] Add pictures in the home page
